@@ -1,0 +1,365 @@
+<head>
+    <title>form builer tool</title>
+    <style>
+
+
+        input[type="checkbox"] {
+    appearance: none;      /* removes default style */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    width: 18px;
+    height: 18px;
+    border: 2px solid #555;   /* box border */
+    border-radius: 4px;       /* slight rounded corners */
+    display: inline-block;  
+    position: relative;
+    cursor: pointer;
+    background-color: white;  /* default box color */
+  }
+
+  /* tick effect after checked */
+  input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    left: 1px;
+    top: -3px;
+    font-size: 16px;
+    color: green;  /* tick color */
+  }
+
+  /* optional hover effect */
+  input[type="checkbox"]:hover {
+    border-color: #0078d7;
+  }
+
+
+
+
+
+
+
+        body{
+            background-color: lightblue;
+        }
+
+        .container{
+            margin: 0px auto;
+            width: 1200px;
+            height: 550px;
+            background-color: red;
+            display: flex;
+        }
+
+        .leftContainer{
+            padding-left: 50px;
+            width: 600px;
+            background-color:#89c3d7;
+            flex-grow: 1;
+            border: solid 1px black;
+        }
+
+        .rightContainer{
+            width: 600px;
+            background-color: #89c3d7;
+            flex-grow: 1;
+            border: solid 1px black;
+        }
+
+        .leftTitle{
+            color: aliceblue;
+            font-size: 40;
+        }
+
+        .leftBody{
+            padding-top: 30px;
+            font-size: 20;
+            color:black
+            
+        }
+
+        #addButton{
+            background: linear-gradient(45deg, lightblue, rgb(83, 134, 216));  
+            font-size: 15;
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition-duration: 0.5s;
+        }
+
+    
+
+        .list{
+            background-color: rgb(199, 232, 243);
+            padding: 5px 0px; 
+            padding-right: 200px;
+            cursor: pointer;
+            transition-duration: 0.5s;
+        }
+
+        .list:hover{
+            background-color: lightblue;
+        }
+
+        .inputBox{
+            background-color: rgb(199, 232, 243);
+            border: solid 1px white;
+        }
+
+        .inputBox:hover{
+            background-color: lightblue;
+        }
+
+
+        .rightBox{
+            width: 500px;
+            margin: 0px auto;
+            height: 500px;
+        }
+
+        .textBox{
+            font-size: 20;
+            padding-top: 26px;
+            padding-bottom:13px ;
+            border-bottom: solid 1px black;
+        }
+
+        .rightInputBox{
+            background-color: rgb(199, 232, 243);
+            padding: 5px 0px;
+            padding-right: 200px;
+            border: solid lightblue;
+            transition-duration: 0.5s;
+        }
+
+        .rightInputBox:hover{
+            background-color: lightblue;
+        }
+
+        .rightRadio{
+            font-size: 20;
+            padding-top: 26px;
+            padding-bottom:13px ;
+            border-bottom: solid 1px black;
+        }
+
+        .rightCheckbox{
+            font-size: 20;
+            padding-top: 26px;
+            padding-bottom:13px ;
+            border-bottom: solid 1px black;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="leftContainer">
+            <h1 class="leftTitle">Add an input:</h1>
+            <div class="leftBody">
+                <div style="padding-bottom: 10px;">Select type field:</div>
+                <div>
+                    <select name="type" id="type" class="list">
+                        <option value="nil">choose</option>
+                        <option value="textbox">textbox</option>
+                        <option value="radio">radio</option>
+                        <option value="checkbox">checkbox</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div style="padding-top: 70px;padding-bottom: 10px;">input for the field:</div>
+                </div>
+                <div>
+                    <input type="text" name="input" id="input" class="inputBox">
+                </div>
+
+                <div style="padding-top: 80px;">
+                    <button id="addButton" onclick="buttonCLick()">add field</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rightContainer">
+            <div class="rightBox" id="rBox">
+                <div class="textBox">
+                    <div>What is yout name?</div>
+                    <input type="text" class="rightInputBox">
+                </div>
+
+
+                <div class="rightRadio">
+                    <div>Are you vegetarian?</div>
+                    
+                    <label style="display: flex;">
+                        <input type="radio" name="choice">
+                        <div style="padding-right: 10px;" >Yes</div>
+                        <input type="radio" name="choice">
+                        <div>No</div>
+                    </label>
+                </div>
+
+                
+                <div class="rightCheckbox">
+                    <div>What are your hobbies?</div>
+
+                    <label style="display: flex;">
+                        <input type="checkbox" name="choice">
+                        <div style="padding-right: 10px;" >Yes</div>
+                        <input type="checkbox" name="choice">
+                        <div>No</div>
+                    </label>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>    
+
+    <script>
+    
+        let uniqueId=0;
+
+        data=[];
+
+
+        function checkBoxEl(input){
+
+            const split = input.split(",");
+            if(split.length<2){
+                return;
+            }
+            uniqueId++;
+
+            const el1=document.createElement("div");
+            el1.innerHTML=split[0];
+
+            const el2=document.createElement("label");
+            el2.style.display="flex";
+
+            for(let i=1;i<split.length;i++){
+                const el3=document.createElement("input");
+                el3.type="checkbox";
+                el3.name=uniqueId;
+
+                const el4=document.createElement("div");
+                el4.style.paddingRight="10px";
+                el4.innerHTML=split[i];
+
+                    el2.appendChild(el3);
+                    el2.appendChild(el4);
+            }
+
+            const el5=document.createElement("div");
+            el5.className="rightRadio"; 
+
+            el5.appendChild(el1);
+            el5.appendChild(el2);
+
+            const el6=document.getElementById("rBox");
+            el6.appendChild(el5);
+
+            console.log(el5);
+
+
+        }
+
+        function radioEl(input){
+            const split = input.split(",");
+            if(split.length<2){
+                return;
+            }
+            uniqueId++;
+
+            const el1=document.createElement("div");
+            el1.innerHTML=split[0];
+
+            const el2=document.createElement("label");
+            el2.style.display="flex";
+
+            for(let i=1;i<split.length;i++){
+                const el3=document.createElement("input");
+                el3.type="radio";
+                el3.name=uniqueId;
+
+                const el4=document.createElement("div");
+                el4.style.paddingRight="10px";
+                el4.innerHTML=split[i];
+
+                    el2.appendChild(el3);
+                    el2.appendChild(el4);
+            }
+
+            const el5=document.createElement("div");
+            el5.className="rightRadio"; 
+
+            el5.appendChild(el1);
+            el5.appendChild(el2);
+
+            const el6=document.getElementById("rBox");
+            el6.appendChild(el5);
+
+            console.log(el5);
+
+            
+        }
+
+        function textBoxEl(input){
+            const el1=document.createElement("div");
+            const el2=document.createElement("input");
+
+            el1.innerHTML=input;
+            el2.className="rightInputBox";
+
+            const el3=document.createElement("div");
+            el3.className="textBox";
+            el3.appendChild(el1);
+            el3.appendChild(el2);
+
+            const el4=document.getElementById("rBox");
+            el4.appendChild(el1);
+            el4.appendChild(el2);
+
+            
+
+        }
+
+        function buttonCLick(){
+            const val=document.querySelector("select").value;
+            const input=document.querySelector("input").value;
+            
+
+            if(input && val!="nil"){
+                const temp={"type":val,"input":input};  
+                data.push(temp);
+            }
+
+            render();
+        }
+
+        function render(){
+            document.getElementById("rBox").innerHTML="";
+
+            for(let i=0;i<data.length;i++){
+                let currentObj=data[i];
+
+
+                if(currentObj.type=="textbox"){
+                    textBoxEl(currentObj.input);
+                }else if(currentObj.type=="radio"){
+                    radioEl(currentObj.input);
+                }else if(currentObj.type=="checkbox"){
+                    checkBoxEl(currentObj.input);
+                }
+
+
+            }
+        }
+
+        
+
+    </script>
+
+
+</body>

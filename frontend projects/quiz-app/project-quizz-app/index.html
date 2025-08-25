@@ -1,0 +1,215 @@
+<head>
+    <title>quizz time!</title>
+    <style>
+        
+        .container{
+            width: 1200px;
+            height: 550px;
+            margin: 0px auto;;
+            /* background-color: red; */
+            display: flex;
+        }
+
+        .leftBox{
+            /* background-color: green; */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+             max-width: 50%;  
+             background-color: lightcyan;
+        }
+
+        .rightBox{
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 50%; 
+            background-color: lightyellow;
+        }
+
+        .leftTitle{
+            display: flex;
+            justify-content: center;
+            font-size: 30;
+            flex-grow: 1;
+            align-items: center;
+            background-color: pink;
+        }
+        
+        .leftContent{
+            /* background-color: red; */
+            display: flex;
+            justify-content: center;
+            flex-grow: 30;
+            max-width: 100%;  
+            font-size: 40;
+            padding-top: 30px;
+            margin-left: 50px;
+            margin-right: 50px;
+            align-items: center;
+        }
+
+        .rightTitle{
+            display: flex;
+            justify-content: center;
+            font-size: 30;
+            flex-grow: 2;
+            align-items: center;
+            background-color: pink;
+        }
+
+        .rightContent{
+            flex-grow: 12;
+            max-width: 100%; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+        }   
+
+        .optionButton{
+            max-width: 550px;
+            margin-top: 60px;
+            font-size: 20;
+            padding: 10px 30px;
+            background-color: blue;
+            color:white;
+            border-radius: 30px;
+        }
+
+        .lastPage{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: green;
+            font-size: 30;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        
+        <div class="leftBox">
+            <div class="leftTitle">
+                Question
+            </div>
+
+            <div class="leftContent" id="q1" >
+                <div> </div>
+            </div>
+        </div>
+
+        <div class="rightBox">
+            <div class="rightTitle" id="t1">
+                options:
+            </div>
+
+            <div class="rightContent">
+                <button class="optionButton" id="op1">Hypertext Markup Language</button>
+                <button class="optionButton" id="op2">Hypertext Markdown Language</button>
+                <button class="optionButton" id="op3">Hyperloop Machine Language</button>
+                <button class="optionButton" id="op4">Helicopters Terminals Motorboats Lamborginis</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import {quizData,otherData} from './data.js';
+        let totalCount=0;
+        let correctCount=0;
+        let gButtonId="";
+        let lastIdx=quizData.length;
+        
+
+        function render(index){
+            totalCount++;
+            const {a}=quizData[index];
+            const {b}=quizData[index];
+            const {c}=quizData[index];
+            const {d}=quizData[index];
+            let {title}=otherData[0];
+            const {question}=quizData[index];
+
+            document.getElementById("q1").innerHTML=question;
+            document.getElementById("op1").innerHTML=a;
+            document.getElementById("op2").innerHTML=b;
+            document.getElementById("op3").innerHTML=c;
+            document.getElementById("op4").innerHTML=d;
+            document.getElementById("t1").innerHTML=title;
+
+            document.getElementById("op1").onclick=()=>{
+                checkAns("a",index,"op1");
+            }
+            document.getElementById("op2").onclick=()=>{
+                checkAns("b",index,"op2");
+            }
+            document.getElementById("op3").onclick=()=>{
+                checkAns("c",index,"op3");
+            }
+            document.getElementById("op4").onclick=()=>{
+                checkAns("d",index,"op4");
+            }
+        }
+
+
+        function renderAfterInput(num,index){
+            let {title}=otherData[0];
+            
+
+            if(num==1){
+                document.getElementById("t1").innerHTML="correct";
+                document.getElementById(gButtonId).style.backgroundColor="green";
+                
+
+            }else{
+                document.getElementById("t1").innerHTML="incorrect";
+                document.getElementById(gButtonId).style.backgroundColor="red";
+            }
+            return;
+        }
+
+        function checkAns(input,index,buttonID){
+            gButtonId=buttonID;
+            const {correct}=quizData[index];
+            if(input==correct){
+                renderAfterInput(1,index);
+                correctCount++;
+            }else{
+                renderAfterInput(0,index);
+            }
+
+            if(index!=quizData.length-1){
+                setTimeout(()=>{
+                    document.getElementById(gButtonId).style.backgroundColor="blue";
+                    render(index+1);
+                },2000);     
+            }
+            else{
+                setTimeout(()=>{
+                    lastPage()
+                },2000); 
+            }
+        }
+
+        function lastPage(){
+            const divEL=document.querySelector("div");
+            divEL.classList.add("lastPage");
+            let accuracy=correctCount/totalCount;
+            divEL.innerHTML="Your accuracy is "+accuracy;
+            console.log(text);
+
+        }
+
+        render(0)
+        
+    </script>
+
+
+
+</body>

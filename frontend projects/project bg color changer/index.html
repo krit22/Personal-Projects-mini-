@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>background color changer</title>
+
+        <style>
+            body{
+                background-color: white;
+            }
+
+
+            .container{
+                background-color: red;
+                width:1200px;  
+                margin: 0 auto;
+                display: flex;
+            }
+
+            .leftContainer{
+                background-color: darkblue;
+                font-size: 30;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                flex-grow: 1;
+            }
+
+            .rightcontainer{
+                background-color: lightblue;
+                flex-grow: 4;
+            }
+
+            .button{
+                width:200px;
+                font-size: 20;
+                border-radius: 100px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="leftContainer" id="left">
+
+            </div>
+
+            <div class="rightcontainer">
+                <input type="text" >
+                <button id="buttonToAdd" onclick='addColor()'>add color</button>
+            </div>  
+        </div>
+    </body>
+
+    <script>
+        colorsList=["red","blue"];
+
+        function colorChange(color){
+            document.querySelector("body").style.backgroundColor=color;
+        }
+
+        function render(){
+            document.getElementById("left").innerHTML="";
+            for(let i=0;i<colorsList.length;i++){
+                const buttonEl=document.createElement("button");
+                buttonEl.setAttribute("class","button");
+                buttonEl.onclick=()=>{
+                    colorChange(colorsList[i]);
+                }
+                buttonEl.style.backgroundColor = colorsList[i];
+                buttonEl.innerHTML=colorsList[i];
+                document.getElementById("left").appendChild(buttonEl);
+            }
+        }
+
+        render();
+
+        function addColor(){
+            const input=document.querySelector("input").value;
+            colorsList.push(input);
+            render();
+        }
+
+    </script>
+
+
+</html>

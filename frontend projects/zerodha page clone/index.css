@@ -1,0 +1,50 @@
+.toplink{
+    color: rgb(93, 92, 92);
+    font-size: 18;
+    cursor: pointer;
+    padding-right: 40px;
+    transition: color 0.5s;
+}
+
+.toplink:hover{
+    color:#4285F4;
+}
+
+.buttonstyle{
+    cursor: pointer;
+    border: white;
+    color: white;
+    background-color: #4285F4;
+    border-color: #4285F4;
+    font-size: 20;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition-duration: 0.5s;
+}
+
+.buttonstyle:hover{
+    background-color: black;
+    border: white;
+
+}
+
+.leftText{
+    padding-top: 15px; 
+    font-size: 20 ;
+    color: rgb(100, 97, 97);
+    font-style: italic;
+}
+
+.linkOne{
+    color: #225bb7;
+    transition-duration: 0.4s;
+    text-decoration: none;
+}
+
+.linkOne:hover{
+    color: black;
+}
+
+

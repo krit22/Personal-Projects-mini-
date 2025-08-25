@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <title>drag functionatlity</title>
+        <style>
+
+            #upperBox{
+                width: 200px;
+                height: 200px;
+                background-color: lightblue;
+                margin-bottom: 50px;
+                border: solid 1px black;
+            }
+
+            #lowerBox{
+                width: 200px;
+                height: 200px;
+                background-color: lightblue;
+                border: solid 1px black;
+            }
+
+            #dragMe1{
+                width: 80px;
+                height: 80px;
+                background-color: lightblue;
+                border: solid 1px black;
+            }
+
+
+            #dragMe2{
+                width: 80px;
+                height: 80px;
+                background-color: lightblue;
+                border: solid 1px black;
+            }
+
+
+            body{
+                display: flex;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div id="upperBox">
+
+        </div>
+
+        <div id="lowerBox">
+
+        </div>
+
+        <br>
+        
+        <div id="dragMe1" draggable="true" >
+            Hi 1
+        </div>
+
+        <div id="dragMe2" draggable="true">
+            Hi 2
+        </div>
+
+
+
+        <script>
+            const up=document.getElementById("upperBox");
+            const dn=document.getElementById("lowerBox"); 
+
+
+
+
+            const item=document.getElementById("dragMe1");
+            const item1=document.getElementById("dragMe2");
+
+            item.addEventListener("dragstart",function(event){
+                event.dataTransfer.setData("key",event.target.id);
+            })
+
+
+            item1.addEventListener("dragstart",function(event){
+                event.dataTransfer.setData("key",event.target.id);
+            })
+
+
+
+
+
+
+
+
+            up.addEventListener("dragover",function(event){
+                event.preventDefault();
+            })
+
+            dn.addEventListener("dragover",function(event){
+                event.preventDefault();
+            })            
+            
+
+            up.addEventListener("drop",function(event){
+                event.preventDefault();
+                const idInText=event.dataTransfer.getData("key");
+                const divEl=document.getElementById(idInText);
+                event.target.appendChild(divEl);
+            })
+
+            dn.addEventListener("drop",function(event){
+                event.preventDefault();
+                const idInText=event.dataTransfer.getData("key");
+                const divEl=document.getElementById(idInText);
+                event.target.appendChild(divEl);
+            })
+
+        </script>
+
+
+
+    </body>
+</html>

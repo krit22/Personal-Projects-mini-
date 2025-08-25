@@ -1,0 +1,276 @@
+<html>
+    <head>
+        <title>taskify</title>
+
+        <style>
+            .container{
+                width: 1250px;
+                min-height: 550px;
+                /* background-color: rebeccapurple; */
+                margin: 0px auto;
+                display: flex;
+            }
+
+            .innerContainer{
+                height: 100%;
+                /* background-color: red; */
+                padding-right: 10px;
+                flex-grow: 1;
+                /* border: 1px solid black; */
+                margin: 5px 10px;
+                min-height: 500px;
+                max-width: 277px;
+            }
+
+            .innerContaineHead{
+                display: flex;
+                justify-content: space-between;
+                padding-top: 5px;
+                align-items: center;
+                padding-bottom: 20px;
+            }   
+
+
+            .innerContaineHeadLeft{
+                font-size: 18px;
+                font-weight: bold;
+            }   
+
+            .box{
+                border: 1px solid black;
+                border-radius: 5px;
+                padding: 20px 10px;
+                margin-bottom: 10px;
+                width: 100%;
+                background-color: rgb(250, 250, 250 );
+            }
+
+            .heading{
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .content{
+                font-size: 17px;
+                padding-bottom: 10px;
+            }
+
+            .textInput{
+                margin-top: 15px;
+            }
+
+            .buttonDiv{
+                padding-top: 20px;
+                padding-left: 220px;                   
+            }
+
+            .addButton{
+                background-color: black;
+                color: white;
+                border-radius: 7px;
+                padding: 5px 10px;
+            }
+
+            .blackButton{
+                background-color: rgb(39, 38, 38);
+                color: white;
+                font-size: 15;
+                padding-right: 220px;
+                height: 30px;
+                border-radius: 5px;
+                width: 300px;
+                margin-bottom: 10px;
+            }
+
+        </style>
+    </head>
+
+
+
+
+    <body>
+        <div class="container">
+
+            <div class="innerContainer" id="1">
+                <div class="innerContaineHead">
+                    <div class="innerContaineHeadLeft">
+                        To Do
+                    </div>
+
+                    <div class="innerContaineHeadRight">
+                        <img width="30px" height="auto" src="https://cdn-icons-png.flaticon.com/512/10503/10503202.png" alt="">
+                    </div>
+                </div>
+
+                <button class="blackButton" onclick="buttonClick('To Do')">Add new</button>
+
+                 <div class="box" draggable="true">
+                    <div class="heading"> To Do </div>
+                    <div class="content"> Go for shopping</div>
+                    <div class="dateInfo"> August 21, 2024</div>
+                </div>
+
+                <div class="box" draggable="true">
+                    <div class="heading"> Heading here </div>
+                    <div class="content"> Content here</div>
+                    <div class="dateInfo"> date info</div>
+                </div> 
+
+                <!-- <div class="box">
+                    <div class="heading">Add New to Do :</div>
+                    <input class="textInput" type="text" id="taskNameInput" placeholder="Type task name here">
+                    <input class="textInput" type="text" id="taskDescriptionInput" placeholder="type task description here">
+                    <div class="buttonDiv"><button class="addButton" onclick="buttonClick('To Do')">Add </button></div>
+                </div> -->
+
+            </div>
+
+            <div class="innerContainer" id="2">
+                <div class="innerContaineHead">
+                    <div class="innerContaineHeadLeft">
+                        In Progress
+                    </div>
+
+                    <div class="innerContaineHeadRight">
+                        <img width="30px" height="auto" src="https://cdn-icons-png.flaticon.com/512/10503/10503202.png" alt="">
+                    </div>
+                </div>
+
+                <button class="blackButton" onclick="buttonClick('In Progress')">Add new</button>
+
+
+            </div>
+
+            <div class="innerContainer" id="3">
+                <div class="innerContaineHead">
+                    <div class="innerContaineHeadLeft">
+                        Under Review
+                    </div>
+
+                    <div class="innerContaineHeadRight">
+                        <img width="30px" height="auto" src="https://cdn-icons-png.flaticon.com/512/10503/10503202.png" alt="">
+                    </div>
+                </div>
+
+                <button class="blackButton" onclick="buttonClick('Under Review')">Add new</button>
+
+
+            </div>
+
+            <div class="innerContainer" id="4" onclick="buttonClick('Finished')">
+                <div class="innerContaineHead">
+                    <div class="innerContaineHeadLeft">
+                        Finished
+                    </div>
+
+                    <div class="innerContaineHeadRight">
+                        <img width="30px" height="auto" src="https://cdn-icons-png.flaticon.com/512/10503/10503202.png" alt="">
+                    </div>
+                </div>
+
+                <button class="blackButton">Add new</button>
+
+
+            </div>
+                
+            
+
+        </div>
+    </div>
+
+
+    <script>
+
+        arr=[{
+            "category":"In Progress", 
+            "heading":"study",
+            "description":"Study chemistry",
+            "time":"10 August"
+        }];
+
+
+        function buttonClick(category22){
+
+            const temp=document.createElement("div");
+            temp.id="temp";
+            
+            temp.innerHTML=`<div class="box">
+                    <div class="heading">Add New to Do :</div>
+                    <input class="textInput" type="text" id="taskNameInput" placeholder="Type task name here">
+                    <input class="textInput" type="text" id="taskDescriptionInput" placeholder="type task description here">
+                    <div class="buttonDiv"><button class="addButton" onclick="buttonClick('To Do')">Add </button></div>
+                </div>  `;
+
+
+            const temp1=document.getElementById("1");
+            temp1.prepend(temp);
+            
+
+
+
+            const el1=document.getElementById("taskNameInput");
+            const el2=document.getElementById("taskDescriptionInput");
+
+            let description22=el2.value;
+            let title=el1.value;
+            
+            arr.push({category:category22,heading:title,description:description22,time:"10 August"});
+            console.log(arr);
+
+            render();
+        }
+
+        function render(){
+            for(let i=0;i<arr.length;i++){
+                let category=arr[i].category;
+                let heading=arr[i].heading;
+                let description=arr[i].description;
+                let time=arr[i].time;
+
+                const e1 = document.createElement("div");
+                const e2 = document.createElement("div");
+                const e3 = document.createElement("div");
+
+                e1.classList.add("heading");
+                e2.classList.add("content");
+                e3.classList.add("dateInfo");
+
+                e1.innerText=heading;
+                e2.innerText=description;
+                e3.innerText=time;
+                
+                const e4=document.createElement("div");
+                e4.className="box";
+                e4.draggable="true";
+
+                e4.appendChild(e1);
+                e4.appendChild(e2);
+                e4.appendChild(e3);
+
+                
+                
+                if(category=="To Do"){
+                    const e5=document.getElementById("1");
+                    e5.appendChild(e4);
+                }
+                else if(category=="In Progress"){
+                    const e5=document.getElementById("2");
+                    e5.appendChild(e4);
+                }
+                else if(category=="Under Review"){
+                    const e5=document.getElementById("3");
+                    e5.appendChild(e4);
+                }
+                else if(category=="Finished"){
+                    const e5=document.getElementById("4");
+                    e5.appendChild(e4);
+                }
+
+            }
+        }
+    </script>
+
+
+    </body>
+
+</html>
